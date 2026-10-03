@@ -1,0 +1,508 @@
+/* ── Custom Fonts ─────────────────────────────────────── */
+/*@font-face{
+  font-family:'Kenyan Coffee';
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/Kenyan_coffee/Kenyan Coffee Rg.otf') format('opentype');
+}
+@font-face{
+  font-family:'Kenyan Coffee';
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/Kenyan_coffee/Kenyan Coffee Bd.otf') format('opentype');
+}
+@font-face{
+  font-family:'Juliette';
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/juliette/Juliette-Jpz9M.ttf') format('truetype');
+}
+@font-face{
+  font-family:'Juliette';
+  font-weight:400;
+  font-style:italic;
+  font-display:swap;
+  src:url('/assets/juliette/JulietteItalic-G3zPg.ttf') format('truetype');
+}*/
+@font-face{
+  font-family:'Juliett';
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/juliett/Juliett-Regular.otf') format('opentype');
+}
+@font-face{
+  font-family:'Juliett';
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/juliett/Juliett-Bold.otf') format('opentype');
+}
+@font-face{
+  font-family:'Juliett';
+  font-weight:400;
+  font-style:italic;
+  font-display:swap;
+  src:url('/assets/juliett/Juliett-Italic.otf') format('opentype');
+}
+@font-face{
+  font-family:'Reversal';
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/reversal/Reversal Bd.otf') format('opentype');
+}
+@font-face{
+  font-family:'Reversal';
+  font-weight:700;
+  font-style:italic;
+  font-display:swap;
+  src:url('/assets/reversal/Reversal Bd It.otf') format('opentype');
+}
+@font-face{
+  font-family:'CharlesWright';
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+  src:url('/assets/charles-wright-singapore/CharlesWrightSingapore.otf') format('opentype');
+}
+
+/* ── Reset ────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0}
+
+/* ── Retro Palette Tokens ─────────────────────────────── */
+:root{
+  color-scheme: only light;
+
+  /* Retro 4-colour palette from image */
+  --cream:  #f7e4c0;   /* warm cream  — background */
+  --navy:   #01204E;   /* deep navy   — ink, borders */
+  --teal:   #028391;   /* retro teal  — accent */
+  --orange: #F85525;   /* vivid orange — CTA & highlights */
+  --sand:   #FAA968;   /* soft apricot — panel fill */
+
+  /* Semantic aliases */
+  --bg:     var(--cream);
+  --panel:  #FDE9C0;   /* warmer cream for panels */
+  --ink:    var(--navy);
+  --mut:    #2E5A82;   /* navy-blue mid tone for muted text */
+  --line:   var(--navy);
+  --zap:    var(--orange);
+  --blue:   var(--teal);
+  --vio:    #C05010;   /* warm burnt for gradient end */
+  --grn:    var(--teal); /* teal as the "online" dot colour */
+  --me-bg:  var(--navy);
+  --me-tx:  var(--cream);
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+html{scroll-padding-top:6rem;scroll-behavior:smooth}
+@view-transition{navigation:auto}
+
+body{
+  background-color:var(--bg);
+  /* subtle dot texture in navy at low opacity */
+  background-image:radial-gradient(color-mix(in srgb,var(--navy) 10%,transparent) 1px,transparent 1px);
+  background-size:22px 22px;
+  background-attachment:fixed;
+  color:var(--ink);
+  font:400 1rem/1.65 'fornire',Georgia,serif;
+  min-height:100vh;
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);
+}
+
+/* ── Typography ───────────────────────────────────────── */
+/* h2/h3 — Juliett (elegant serif) */
+h2,h3{
+  font-family:'Juliett','Kenyan Coffee',Georgia,serif;
+  font-weight:400;
+  text-transform:none;
+  line-height:1.1;
+  letter-spacing:.01em;
+}
+/* h1 — Reversal (bold retro wide) */
+h1{
+  font-family:'Reversal','Juliett','Kenyan Coffee',Georgia,serif;
+  font-weight:700;
+  text-transform:none;
+  line-height:1.1;
+  letter-spacing:.02em;
+  font-size:clamp(2rem,8vw,3.8rem);
+  margin-bottom:1rem;
+}
+h2{font-size:clamp(1.7rem,5.5vw,2.8rem);margin-bottom:1rem}
+h3{font-size:1.2rem;margin-bottom:.4rem}
+
+.lbl{
+  font-family:'fornire',Georgia,serif;
+  font-weight:700;font-size:.75rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mut);margin-bottom:.7rem;
+}
+
+/* accent gradient — teal to orange */
+.g{background:linear-gradient(90deg,var(--teal),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* retro highlight */
+mark{background:var(--orange);color:#fff;padding:0 .22em;border-radius:4px;font-style:normal}
+
+/* ── MyFestivo brand span ─────────────────────────────── */
+/* Base: ensures case is preserved via font without altering normal body text styling */
+.mf {
+  font-family: 'fornire', Georgia, serif;
+  font-variant-caps: normal;
+  text-transform: none;
+}
+/* Emphasis: violet text in headings */
+h1 .mf, h2 .mf, h3 .mf {
+  color: #8b3fc8;
+  font-weight: 700;
+  -webkit-text-fill-color: #8b3fc8; /* Overrides .g if placed inside it */
+}
+/* Emphasis: violet badge when inside product tiles (which have a teal background) */
+.tile .mf {
+  background-color: #8b3fc8;
+  color: #fff;
+  padding: 0 0.25em;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.top{
+  position:sticky;top:0;z-index:99;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .8rem;
+  padding:.65rem 1.1rem;
+  background:var(--cream);
+  border-bottom:2px solid var(--navy);
+}
+
+.brand{
+  display:flex;align-items:center;gap:.55rem;
+  font-family:'CharlesWright','Kenyan Coffee',sans-serif;
+  font-weight:400;font-variant-caps:small-caps;
+  font-size:1.25rem;letter-spacing:.06em;
+  color:var(--ink);text-decoration:none;margin-right:auto;
+}
+
+.logo{
+  width:32px;height:32px;
+  border:2px solid var(--navy);border-radius:8px;
+  background:var(--orange);color:#fff;
+  display:grid;place-items:center;
+  font-family:'CharlesWright','Kenyan Coffee',sans-serif;font-weight:400;font-size:.9rem;
+}
+
+/* ── Hamburger button ─────────────────────────────────── */
+#nav-toggle{
+  display:none;
+  flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;padding:6px;
+  background:none;border:2px solid var(--navy);border-radius:8px;
+  cursor:pointer;order:2;
+}
+#nav-toggle span{
+  display:block;height:2px;width:100%;
+  background:var(--navy);border-radius:2px;
+  transition:transform .25s,opacity .2s;
+}
+#nav-toggle[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#nav-toggle[aria-expanded=true] span:nth-child(2){opacity:0}
+#nav-toggle[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile nav: hidden until hamburger opened */
+@media(max-width:859px){
+  #nav-toggle{display:flex}
+  nav{
+    position:absolute; top:100%; right:0;
+    width:50%; background:transparent;
+    flex-direction:column; gap:.3rem;
+    overflow:hidden; max-height:0;
+    transition:max-height .3s ease;
+    padding: 0 1rem; /* add padding so it doesn't touch the edge */
+  }
+  nav.open{max-height:400px; padding-top:.5rem; padding-bottom:.5rem;}
+  nav a{
+    padding:.65rem 1rem;
+    border-radius:10px;
+    border:2px solid transparent;
+    text-align: left;
+  }
+}
+
+/* Desktop nav: always visible, horizontal */
+@media(min-width:860px){
+  #nav-toggle{display:none}
+  nav{
+    order:0;width:auto;
+    display:flex;flex-direction:row;gap:.2rem;
+    overflow-x:auto;scrollbar-width:none;max-height:none;
+  }
+}
+
+nav a{
+  white-space:nowrap;padding:.4rem .85rem;
+  color:var(--mut);text-decoration:none;
+  font-family:'fornire',Georgia,serif;font-weight:600;font-size:.9rem;
+  border-radius:999px;border:2px solid transparent;
+  transition:color .15s,border-color .15s,background .15s;
+}
+nav a:hover{color:var(--ink)}
+nav a[aria-current]{color:var(--ink);border-color:var(--navy);background:var(--panel);box-shadow:2px 2px 0 var(--navy)}
+
+/* ── Main ─────────────────────────────────────────────── */
+main{max-width:66rem;margin:auto;padding:2rem 1.1rem 1rem}
+
+/* ── Chat bubbles ─────────────────────────────────────── */
+.b,.card,details{background:var(--panel);border:2px solid var(--navy);box-shadow:3px 3px 0 var(--navy)}
+.b{width:fit-content;max-width:min(38rem,94%);padding:.8rem 1.1rem;border-radius:18px 18px 18px 4px;margin:.6rem 0}
+.b.me{margin-left:auto;background:var(--me-bg);color:var(--me-tx);border-color:var(--navy);border-radius:18px 18px 4px 18px}
+/* Hero large chat bubble — Reversal bold for max retro impact */
+.b.lg{
+  font-family:'Reversal','Juliett',Georgia,serif;font-weight:700;
+  font-size:clamp(2rem,7vw,3.6rem);line-height:1.1;
+  letter-spacing:.02em;padding:1.1rem 1.5rem;
+  background:var(--cream);color:var(--navy);
+}
+
+/* ── Cards ────────────────────────────────────────────── */
+.card{border-radius:14px;padding:1.2rem}.mut{color:var(--mut)}
+
+/* ── Typing indicator ─────────────────────────────────── */
+.typing{display:flex;gap:5px;padding:.9rem 1.1rem}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--mut);animation:bn 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bn{50%{transform:translateY(-5px);opacity:.4}}
+
+/* ── Chips ────────────────────────────────────────────── */
+.chips{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.1rem 0}
+.chip{
+  --c:var(--navy);
+  font-family:'fornire',Georgia,serif;font-weight:700;font-size:.92rem;
+  min-height:44px;padding:.55rem 1.1rem;
+  border:2px solid var(--c);color:var(--c);background:var(--panel);
+  border-radius:999px;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;
+  box-shadow:3px 3px 0 var(--c);
+  transition:transform .12s,box-shadow .12s,background .15s;
+}
+.chip:hover{transform:translate(-1px,-1px);background:color-mix(in srgb,var(--c) 8%,var(--panel))}
+.chip:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--c)}
+.chip[aria-selected=true]{background:var(--orange);color:#fff;border-color:var(--navy);box-shadow:3px 3px 0 var(--navy)}
+.c2{--c:var(--teal)}.c3{--c:var(--orange)}.c4{--c:var(--mut)}
+/* home page quick-reply chips align right, like a chat reply */
+[data-p=home] #chips{justify-content:flex-end}
+
+/* ── Button ───────────────────────────────────────────── */
+.btn{
+  font-family:'fornire',Georgia,serif;font-weight:700;font-size:.95rem;
+  min-height:44px;padding:.6rem 1.3rem;
+  border:2px solid var(--navy);border-radius:999px;
+  background:var(--orange);color:#fff;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;
+  box-shadow:3px 3px 0 var(--navy);transition:transform .12s,box-shadow .12s;
+}
+.btn:hover{transform:translate(-1px,-1px)}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--navy)}
+
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+
+/* ── Layout ───────────────────────────────────────────── */
+.split,.two{display:grid;gap:1.8rem}
+@media(min-width:900px){.split{grid-template-columns:1.25fr 1fr}.two{grid-template-columns:1.25fr 1fr;align-items:start}}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+.side>*{margin-bottom:1rem}
+.side h3{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin-bottom:.6rem;font-family:'fornire',Georgia,serif;font-weight:700;font-variant-caps:normal}
+
+/* ── Tile ─────────────────────────────────────────────── */
+.tile{
+  display:block;border:2px solid var(--navy);border-radius:12px;
+  padding:1.1rem;background:var(--teal);color:#fff;
+  text-decoration:none;
+  font-family:'Juliett',Georgia,serif;font-weight:400;
+  box-shadow:4px 4px 0 var(--navy);transition:transform .12s,box-shadow .12s;
+}
+.tile:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--navy)}
+.tile small{display:block;font-family:'fornire',Georgia,serif;font-weight:400;font-variant-caps:normal;opacity:.9;font-size:.88rem;margin-top:.25rem}
+
+/* ── Pill ─────────────────────────────────────────────── */
+.pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.45rem .9rem;border:2px solid var(--navy);border-radius:12px;
+  background:var(--panel);color:var(--ink);text-decoration:none;
+  font-family:'fornire',Georgia,serif;font-weight:600;font-size:.9rem;
+  margin:0 .4rem .4rem 0;box-shadow:2px 2px 0 var(--navy);
+  transition:transform .12s,box-shadow .12s;
+}
+.pill:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--navy)}
+.on{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 30%,transparent);display:inline-block}
+
+/* ── Compose bar ──────────────────────────────────────── */
+.compose{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.8rem 1rem;border:2px solid var(--navy);border-radius:12px;
+  color:var(--mut);text-decoration:none;background:var(--panel);
+  box-shadow:3px 3px 0 var(--navy);transition:transform .12s,box-shadow .12s;
+}
+.compose:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--navy)}
+
+/* ── Browser frame ────────────────────────────────────── */
+.frame{border:2px solid var(--navy);border-radius:12px;overflow:hidden;background:#01122e;box-shadow:5px 5px 0 var(--navy)}
+.frame img{display:block;width:100%;height:auto}
+.bar{display:flex;gap:6px;padding:.5rem .75rem;background:var(--panel);border-bottom:2px solid var(--navy)}
+.bar i{width:9px;height:9px;border-radius:50%;border:2px solid var(--navy)}
+.cap{font-size:.8rem;color:var(--mut);margin-top:.6rem}
+.cap a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--mut);text-underline-offset:3px;transition:color .15s, text-decoration-color .15s}
+.cap a:hover{color:var(--orange);text-decoration-color:var(--orange)}
+
+/* ── Accordion ────────────────────────────────────────── */
+details{border-radius:12px;margin:.7rem 0;padding:0}
+summary{cursor:pointer;padding:1rem 1.2rem;font-family:'fornire',Georgia,serif;font-weight:700;list-style:none;display:flex;justify-content:space-between;min-height:44px}
+summary::after{content:"+";color:var(--ink);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{padding:0 1.2rem 1.1rem;color:var(--mut)}
+
+/* ── Services accordion grid ──────────────────────────── */
+/* Two-column layout using CSS columns so each detail expands
+   vertically within its column, never affecting the opposite side */
+.svc-grid{
+  column-count:1;
+  column-gap:1rem;
+}
+@media(min-width:640px){
+  .svc-grid{column-count:2;}
+  .svc-grid details{break-inside:avoid;}
+}
+
+
+/* ── Avatar (legacy small circles) ───────────────────── */
+.av{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-family:'Kenyan Coffee',sans-serif;font-weight:700;font-size:1.5rem;background:var(--navy);color:var(--cream);margin-bottom:.9rem;border:2px solid var(--navy)}
+
+/* ── Founder cards – large photo display ─────────────── */
+.founder-card{display:flex;flex-direction:column;padding:0;overflow:hidden;max-width:320px;margin:0 auto;width:100%}
+.founder-photo{
+  width:100%;
+  aspect-ratio:1/1;
+  background:var(--sand);
+  border-bottom:2px solid var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.founder-photo img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+  display:block;
+}
+.founder-initials{
+  font-family:'Reversal','Kenyan Coffee',sans-serif;
+  font-weight:700;
+  font-size:clamp(3rem,10vw,5rem);
+  text-transform:uppercase;
+  color:var(--navy);
+  letter-spacing:.05em;
+  user-select:none;
+}
+.founder-info{padding:1.2rem}
+.founder-info h3{margin-bottom:.5rem}
+.founder-info p{margin:.4rem 0}
+
+/* ── About page: single-column on mobile ──────────────── */
+@media(max-width:639px){
+  [data-p=about] .grid[style*="repeat(2,1fr)"]{
+    grid-template-columns:1fr !important;
+  }
+}
+
+
+/* ── Misc ─────────────────────────────────────────────── */
+.ph{border-style:dashed}ul{padding-left:1.1rem}li{margin:.3rem 0}
+
+/* ── Form ─────────────────────────────────────────────── */
+form{display:grid;gap:.9rem}
+label{font-family:'fornire',Georgia,serif;font-weight:600;font-size:.9rem;display:grid;gap:.35rem}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--cream);border:2px solid var(--navy);border-radius:8px;padding:.75rem .9rem;width:100%;min-height:44px;box-shadow:2px 2px 0 var(--navy);transition:box-shadow .15s}
+input:focus,textarea:focus,select:focus{box-shadow:3px 3px 0 var(--teal);outline:none;border-color:var(--teal)}
+textarea{min-height:120px;resize:vertical}
+
+/* ── Contact page – Special Elite typewriter override ─── */
+.pg[data-p=contact] h1,.pg[data-p=contact] h2,.pg[data-p=contact] h3,
+.pg[data-p=contact] label,.pg[data-p=contact] .lbl,
+.pg[data-p=contact] .b,.pg[data-p=contact] p{
+  font-family:'Special Elite',Georgia,serif;
+  font-weight:400;font-variant-caps:normal;letter-spacing:.02em;
+}
+.pg[data-p=contact] h1{font-size:clamp(2rem,7vw,3.4rem);letter-spacing:.04em}
+.pg[data-p=contact] input,.pg[data-p=contact] textarea,.pg[data-p=contact] select{
+  font-family:'Special Elite',Georgia,serif;letter-spacing:.04em;
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+footer{
+  border-top:2px solid var(--navy);
+  margin-top:3rem;
+  background:var(--navy);
+  color:var(--cream);
+}
+.footer-inner{
+  max-width:66rem;margin:auto;
+  padding:2.8rem 1.1rem 1.8rem;
+  display:grid;
+  gap:2rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));
+}
+.footer-brand{
+  display:flex;align-items:center;gap:.55rem;
+  font-family:'CharlesWright','Kenyan Coffee',sans-serif;
+  font-weight:400;font-variant-caps:small-caps;
+  font-size:1.2rem;letter-spacing:.06em;
+  color:var(--cream);text-decoration:none;
+  margin-bottom:.6rem;
+}
+.footer-brand .logo{background:var(--orange);color:#fff;border-color:rgba(255,255,255,.3)}
+.footer-tagline{
+  font-size:.85rem;color:color-mix(in srgb,var(--cream) 70%,transparent);
+  font-family:'fornire',Georgia,serif;
+  line-height:1.5;
+}
+.footer-col h4{
+  font-family:'fornire',Georgia,serif;
+  font-weight:700;font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sand);margin-bottom:.85rem;
+  font-variant-caps:normal;
+}
+.footer-col ul{list-style:none;padding:0;margin:0}
+.footer-col li{margin:.42rem 0}
+.footer-col a{
+  color:var(--cream);text-decoration:none;
+  font-family:'fornire',Georgia,serif;font-weight:600;font-size:.9rem;
+  transition:color .15s,letter-spacing .15s;
+}
+.footer-col a:hover{color:var(--sand);letter-spacing:.01em}
+.footer-col a .tag{
+  display:inline-block;margin-left:.4rem;
+  font-size:.7rem;font-weight:700;
+  background:var(--orange);color:#fff;
+  padding:.05em .4em;border-radius:4px;
+  vertical-align:middle;
+}
+.footer-bar{
+  border-top:1px solid color-mix(in srgb,var(--cream) 20%,transparent);
+  max-width:66rem;margin:0 auto;
+  padding:1rem 1.1rem;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:.5rem;
+  font-size:.82rem;color:color-mix(in srgb,var(--cream) 55%,transparent);
+  font-family:'fornire',Georgia,serif;
+}
+.footer-bar a{color:color-mix(in srgb,var(--cream) 55%,transparent);text-decoration:none}
+.footer-bar a:hover{color:var(--cream)}
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.pg>*:not(.seq){animation:up .5s backwards}.pop{animation:up .35s both}
+.seq{transition:opacity .4s,transform .4s}.js .seq:not(.in){opacity:0;transform:translateY(10px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.js .seq:not(.in){opacity:1;transform:none}}
