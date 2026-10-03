@@ -225,20 +225,50 @@ function initHamburger(){
   const btn=$('#nav-toggle');
   const nav=$('#main-nav');
   if(!btn||!nav)return;
-  btn.onclick=()=>{
-    const open=nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded',open);
+
+  // Ensure backdrop overlay element exists
+  let overlay=$('#nav-overlay');
+  if(!overlay){
+    overlay=document.createElement('div');
+    overlay.id='nav-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  function setOpen(isOpen){
+    nav.classList.toggle('open',isOpen);
+    btn.setAttribute('aria-expanded',isOpen?'true':'false');
+    btn.setAttribute('aria-label',isOpen?'Close navigation menu':'Open navigation menu');
+    document.documentElement.classList.toggle('nav-open',isOpen);
+    document.body.classList.toggle('nav-open',isOpen);
+    overlay.classList.toggle('active',isOpen);
+  }
+
+  btn.onclick=(e)=>{
+    e.stopPropagation();
+    const isOpen=!nav.classList.contains('open');
+    setOpen(isOpen);
   };
-  // Close when a nav link is clicked
+
+  // Close when tapping the overlay backdrop
+  overlay.addEventListener('click',()=>setOpen(false));
+
+  // Close when any nav link is clicked
   nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-    nav.classList.remove('open');
-    btn.setAttribute('aria-expanded','false');
+    setOpen(false);
   }));
-  // Close on outside tap
+
+  // Keyboard accessibility: Close on Escape key
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&nav.classList.contains('open')){
+      setOpen(false);
+      btn.focus();
+    }
+  });
+
+  // Close on outside tap if clicked outside nav and toggle button
   document.addEventListener('click',e=>{
-    if(!btn.contains(e.target)&&!nav.contains(e.target)){
-      nav.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
+    if(nav.classList.contains('open')&&!btn.contains(e.target)&&!nav.contains(e.target)){
+      setOpen(false);
     }
   });
 }
