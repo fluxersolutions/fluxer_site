@@ -258,7 +258,7 @@ function init(){
         setTimeout(()=>{
           const dest=c.dataset.go==='home'?'/':`/${c.dataset.go}`+(slug?`#${slug}`:'');
           location.href=dest;
-        },1500);
+        },1250);
       }
     },500);
   });

@@ -409,13 +409,37 @@ details p{padding:0 1.2rem 1.1rem;color:var(--mut)}
 .founder-info h3{margin-bottom:.5rem}
 .founder-info p{margin:.4rem 0}
 
-/* ── About page: single-column on mobile ──────────────── */
-@media(max-width:639px){
-  [data-p=about] .grid[style*="repeat(2,1fr)"]{
-    grid-template-columns:1fr !important;
+/* ── About page: 2×2 grid on desktop, single-column on mobile ─ */
+[data-p=about] .grid{
+  grid-template-columns:1fr;
+}
+@media(min-width:640px){
+  [data-p=about] .grid{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
+/* ── Founders page: 2-column centered grid on desktop ─── */
+#founder-grid{
+  display:grid;
+  gap:1.5rem;
+  grid-template-columns:1fr;       /* mobile: single column */
+  margin-top:1rem;
+}
+@media(min-width:640px){
+  #founder-grid{
+    grid-template-columns:repeat(2,1fr);   /* desktop: strict 2 cols */
+    max-width:1020px;                      /* cap width so cards don't stretch too wide */
+    margin-left:auto;
+    margin-right:auto;
+  }
+  #founder-grid .founder-card{
+    max-width:none;           /* let the grid column control width */
+    margin:0;                 /* remove the auto-centering that fights the grid */
+    display:flex;             /* stack photo + info vertically */
+    flex-direction:column;    /* so the card fills height evenly */
+  }
+}
 
 /* ── Misc ─────────────────────────────────────────────── */
 .ph{border-style:dashed}ul{padding-left:1.1rem}li{margin:.3rem 0}
