@@ -1,4 +1,4 @@
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],R=matchMedia('(prefers-reduced-motion:reduce)').matches;
+﻿const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],R=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const go=p=>false?(location.hash='#/'+p):(location.href=p=='home'?'/':'/'+p);
 
 /* ── Common Footer ────────────────────────────────────── */
@@ -9,7 +9,7 @@ function injectFooter(){
 <div class="footer-inner">
   <div class="footer-col">
     <a class="footer-brand" href="/">
-      <span class="logo" title="Whizap logo">W</span>whizap
+      <img src="/assets/Fulxer_logo.png" alt="Fluxer" class="brand-logo">
     </a>
     <p class="footer-tagline">Think Bigger.<br>Be Practical.</p>
   </div>
@@ -39,7 +39,7 @@ function injectFooter(){
   </div>
 </div>
 <div class="footer-bar">
-  <span>© 2026 Whizap Technologies Private Limited</span>
+  <span>© 2026 Fluxer Solutions Private Limited</span>
   <span><a href="/contact">Start a chat</a></span>
 </div>`;
 }

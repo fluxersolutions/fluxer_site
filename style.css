@@ -188,6 +188,10 @@ h1 .mf, h2 .mf, h3 .mf {
   color:var(--ink);text-decoration:none;margin-right:auto;
 }
 
+.brand-logo{
+  height:36px;width:auto;display:block;
+}
+
 .logo{
   width:32px;height:32px;
   border:2px solid var(--navy);border-radius:8px;
