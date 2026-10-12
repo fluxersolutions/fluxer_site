@@ -52,14 +52,14 @@
   font-family:'Reversal';
   font-weight:700;
   font-style:normal;
-  font-display:swap;
+  font-display:block;
   src:url('/assets/reversal/Reversal Bd.otf') format('opentype');
 }
 @font-face{
   font-family:'Reversal';
   font-weight:700;
   font-style:italic;
-  font-display:swap;
+  font-display:block;
   src:url('/assets/reversal/Reversal Bd It.otf') format('opentype');
 }
 @font-face{
@@ -144,7 +144,7 @@ h3{font-size:1.2rem;margin-bottom:.4rem}
 }
 
 /* accent gradient — teal to orange */
-.g{background:linear-gradient(90deg,var(--teal),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+.g{background:linear-gradient(90deg,var(--teal),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent;font-family:inherit;font-weight:inherit}
 
 /* retro highlight */
 mark{background:var(--orange);color:#fff;padding:0 .22em;border-radius:4px;font-style:normal}
@@ -161,6 +161,22 @@ h1 .mf, h2 .mf, h3 .mf {
   color: #8b3fc8;
   font-weight: 700;
   -webkit-text-fill-color: #8b3fc8; /* Overrides .g if placed inside it */
+}
+/* Safety: .mf inside a gradient .g span must never override the font or fill */
+.g .mf {
+  font-family: inherit;
+  -webkit-text-fill-color: inherit;
+  color: inherit;
+}
+/* Products page: MyFestivo heading uses fornire font and #8b3fc8 brand color */
+[data-p=products] h1 .g,
+[data-p=products] h1 .mf {
+  font-family: 'fornire', Georgia, serif;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: #8b3fc8;
+  -webkit-text-fill-color: #8b3fc8;
 }
 /* Emphasis: violet badge when inside product tiles (which have a teal background) */
 .tile .mf {

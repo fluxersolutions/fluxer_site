@@ -1,4 +1,4 @@
-﻿const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],R=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],R=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const go=p=>false?(location.hash='#/'+p):(location.href=p=='home'?'/':'/'+p);
 
 /* ── Common Footer ────────────────────────────────────── */
@@ -11,7 +11,7 @@ function injectFooter(){
     <a class="footer-brand" href="/">
       <img src="/assets/Fulxer_logo.png" alt="Fluxer" class="brand-logo">
     </a>
-    <p class="footer-tagline">Think Bigger.<br>Be Practical.</p>
+    <p class="footer-tagline">Bigger and Practical.</p>
   </div>
   <div class="footer-col">
     <h4>Products</h4>
@@ -182,6 +182,8 @@ function wrapMyFestivo(){
       const p=node.parentElement;
       if(p&&(p.tagName==='SCRIPT'||p.tagName==='STYLE'))return NodeFilter.FILTER_REJECT;
       if(p&&p.classList.contains('mf'))return NodeFilter.FILTER_REJECT;
+      // skip nodes already inside a .g gradient span — they render correctly as gradient text
+      if(p&&p.classList.contains('g'))return NodeFilter.FILTER_REJECT;
       return node.textContent.includes(WORD)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_SKIP;
     }
   });
