@@ -582,6 +582,21 @@ input,textarea,select{font:inherit;color:var(--ink);background:var(--cream);bord
 input:focus,textarea:focus,select:focus{box-shadow:3px 3px 0 var(--teal);outline:none;border-color:var(--teal)}
 textarea{min-height:120px;resize:vertical}
 
+/* ── Contact page layout ─────────────────────────────── */
+.contact-layout{
+  display:grid;
+  gap:2.2rem;
+  align-items:start;
+}
+@media(min-width:860px){
+  .contact-layout{
+    grid-template-columns:1fr 1.45fr;
+    gap:3rem;
+    align-items:center;
+  }
+}
+.contact-intro{display:flex;flex-direction:column;gap:1rem}
+.contact-form-wrap{width:100%}
 /* ── Contact page – Special Elite typewriter override ─── */
 .pg[data-p=contact] h1,.pg[data-p=contact] h2,.pg[data-p=contact] h3,
 .pg[data-p=contact] label,.pg[data-p=contact] .lbl,
@@ -655,6 +670,14 @@ footer{
 }
 .footer-bar a{color:color-mix(in srgb,var(--cream) 55%,transparent);text-decoration:none}
 .footer-bar a:hover{color:var(--cream)}
+.footer-social{display:flex;align-items:center;gap:1rem}
+.footer-icon-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  color:color-mix(in srgb,var(--cream) 55%,transparent);
+  transition:color .2s,transform .2s;
+}
+.footer-icon-link:hover{color:var(--cream);transform:translateY(-2px)}
+
 
 /* ── Animations ───────────────────────────────────────── */
 @keyframes up{from{opacity:0;transform:translateY(14px)}}

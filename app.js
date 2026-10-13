@@ -40,7 +40,15 @@ function injectFooter(){
 </div>
 <div class="footer-bar">
   <span>© 2026 Fluxer Solutions Private Limited</span>
-  <span><a href="/contact">Start a chat</a></span>
+  <span class="footer-social">
+    <a href="mailto:fluxersolutions@gmail.com" aria-label="Email us" class="footer-icon-link" title="fluxersolutions@gmail.com">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/company/fluxersolutions/" target="_blank" rel="noopener noreferrer" aria-label="Fluxer on LinkedIn" class="footer-icon-link" title="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="/contact">Start a chat</a>
+  </span>
 </div>`;
 }
 
@@ -297,13 +305,88 @@ function init(){
   $$('[role=tab]').forEach(t=>t.onclick=()=>$$('[role=tab]').forEach(x=>{
     const on=x==t;x.setAttribute('aria-selected',on);$('#'+x.dataset.p).hidden=!on;
   }));
+  // ── Contact form: validation + abuse filter + clear on send ────────
+  const ABUSIVE_WORDS = [
+    'fuck','shit','bitch','asshole','bastard','cunt','dick','pussy','cock',
+    'whore','slut','nigger','nigga','faggot','retard','damn','hell','crap',
+    'piss','ass','motherfucker','bullshit','jackass','dumbass','idiot',
+    'moron','imbecile','stupid','loser','scum','jerk','twat','wanker'
+  ];
+
+  function wordCount(str){
+    return str.trim().split(/\s+/).filter(w=>w.length>0).length;
+  }
+
+  function hasAbusiveWords(str){
+    const lower=str.toLowerCase();
+    return ABUSIVE_WORDS.some(w=>new RegExp('\\b'+w+'\\b','i').test(lower));
+  }
+
+  function showFormError(msg){
+    let err=$('#f-error');
+    if(!err){
+      err=document.createElement('p');
+      err.id='f-error';
+      err.style.cssText='color:#ff6b6b;font-size:.875rem;margin:.5rem 0 0;font-weight:500;';
+      const btn=$('#f .btn[type=submit]');
+      if(btn) btn.before(err);
+    }
+    err.textContent=msg;
+    err.style.display='block';
+  }
+
+  function clearFormError(){
+    const err=$('#f-error');
+    if(err) err.style.display='none';
+  }
+
   const f=$('#f');
   if(f)f.onsubmit=e=>{
     e.preventDefault();
-    const n=$('#nm').value.trim().split(' ')[0],bx=$('#done');
-    f.hidden=true;
-    say($('#ms').value.trim(),1,bx,true);
-    setTimeout(()=>say('Thanks'+(n?', '+n:'')+'. We got your message and will reply soon.',0,bx,true),700);
+    const msgEl=$('#ms');
+    const nmEl=$('#nm');
+    const emEl=$('#em');
+    const msgText=msgEl.value.trim();
+    const wc=wordCount(msgText);
+
+    // Word count validation
+    if(wc<15){
+      showFormError(`Message is too short (${wc} word${wc===1?'':'s'}). Please write at least 15 words.`);
+      msgEl.focus();
+      return;
+    }
+    if(wc>150){
+      showFormError(`Message is too long (${wc} words). Please keep it under 150 words.`);
+      msgEl.focus();
+      return;
+    }
+
+    // Abusive language filter
+    if(hasAbusiveWords(msgText)){
+      showFormError('Please keep your message respectful. Remove any offensive language and try again.');
+      msgEl.focus();
+      return;
+    }
+
+    clearFormError();
+
+    const n=nmEl.value.trim().split(' ')[0];
+    const bx=$('#done');
+
+    // Show submitted message as chat bubble
+    say(msgText,1,bx,true);
+    setTimeout(()=>{
+      say('Thanks'+(n?', '+n:'')+'. We got your message and will reply soon.',0,bx,true);
+    },700);
+
+    // Clear all fields
+    f.reset();
+
+    // Re-show form after a short delay so user can send another message
+    setTimeout(()=>{
+      bx.innerHTML='';
+      f.hidden=false;
+    },5500);
   };
   initTypewriter();
   initServices();
