@@ -625,16 +625,14 @@ textarea{min-height:120px;resize:vertical}
 }
 .contact-intro{display:flex;flex-direction:column;gap:1rem}
 .contact-form-wrap{width:100%}
-/* ── Contact page – Special Elite typewriter override ─── */
-.pg[data-p=contact] h1,.pg[data-p=contact] h2,.pg[data-p=contact] h3,
-.pg[data-p=contact] label,.pg[data-p=contact] .lbl,
-.pg[data-p=contact] .b,.pg[data-p=contact] p{
-  font-family:'Special Elite',Georgia,serif;
-  font-weight:400;font-variant-caps:normal;letter-spacing:.02em;
+/* ── Contact page – Special Elite (hardcoded, never change) ── */
+.pg[data-p=contact],.pg[data-p=contact] *{
+  font-family:'Special Elite',Georgia,serif !important;
+  font-variant-caps:normal;
 }
 .pg[data-p=contact] h1{font-size:clamp(2rem,7vw,3.4rem);letter-spacing:.04em}
 .pg[data-p=contact] input,.pg[data-p=contact] textarea,.pg[data-p=contact] select{
-  font-family:'Special Elite',Georgia,serif;letter-spacing:.04em;
+  letter-spacing:.04em;
 }
 
 /* ── Late 90s Easter Egg ──────────────────────────────── */
