@@ -205,7 +205,12 @@ h1 .mf, h2 .mf, h3 .mf {
 }
 
 .brand-logo{
-  height:36px;width:auto;display:block;
+  height:48px;width:auto;display:block;
+}
+/* Header logo scaled up visually — layout-box stays 48px so header height is unchanged */
+.top .brand-logo{
+  transform:scale(1.667);
+  transform-origin:left center;
 }
 
 .logo{
@@ -239,23 +244,17 @@ h1 .mf, h2 .mf, h3 .mf {
 }
 
 @media(max-width:859px){
-  /* Prevent background scrolling when menu is open */
-  html.nav-open, body.nav-open{
-    overflow:hidden !important;
-    touch-action:none;
-  }
-
   /* Header transitions and state when drawer is open */
   .top{
     transition:background-color .25s ease, border-color .25s ease;
   }
-  body.nav-open .top{
+  html.nav-open .top{
     background:color-mix(in srgb,var(--cream) 92%,transparent);
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
     border-bottom-color:color-mix(in srgb,var(--navy) 14%,transparent);
   }
-  body.nav-open .top .btn{
+  html.nav-open .top .btn{
     display:none;
   }
 
@@ -471,6 +470,24 @@ main{max-width:66rem;margin:auto;padding:2rem 1.1rem 1rem}
 .pill:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--navy)}
 .on{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 30%,transparent);display:inline-block}
 
+/* Mobile: make .side pill containers flex so pills wrap evenly */
+@media(max-width:899px){
+  .side>div{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem .35rem;
+    align-items:flex-start;
+    margin-bottom:1rem;
+  }
+  .side>div h3{
+    flex:0 0 100%;
+    margin-bottom:.15rem;
+  }
+  .side>div .tile{
+    flex:0 0 100%;
+  }
+}
+
 /* ── Compose bar ──────────────────────────────────────── */
 .compose{
   display:flex;justify-content:space-between;align-items:center;
@@ -507,13 +524,18 @@ details p{padding:0 1.2rem 1.1rem;color:var(--mut)}
   .svc-grid{column-count:2;}
   .svc-grid details{break-inside:avoid;}
 }
+@media(max-width:639px){
+  .svc-grid details summary{justify-content:space-between;}
+  #founder-grid{justify-items:center;}
+}
 
 
 /* ── Avatar (legacy small circles) ───────────────────── */
 .av{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-family:'Kenyan Coffee',sans-serif;font-weight:700;font-size:1.5rem;background:var(--navy);color:var(--cream);margin-bottom:.9rem;border:2px solid var(--navy)}
 
 /* ── Founder cards – large photo display ─────────────── */
-.founder-card{display:flex;flex-direction:column;padding:0;overflow:hidden;max-width:320px;margin:0 auto;width:100%}
+.founder-card{display:flex;flex-direction:column;padding:0;overflow:hidden;max-width:320px;margin:0 auto;width:100%;text-align:center}
+.founder-info{padding:1.2rem;text-align:left}
 .founder-photo{
   width:100%;
   aspect-ratio:1/1;
@@ -536,7 +558,6 @@ details p{padding:0 1.2rem 1.1rem;color:var(--mut)}
   letter-spacing:.05em;
   user-select:none;
 }
-.founder-info{padding:1.2rem}
 .founder-info h3{margin-bottom:.5rem}
 .founder-info p{margin:.4rem 0}
 
@@ -609,6 +630,20 @@ textarea{min-height:120px;resize:vertical}
   font-family:'Special Elite',Georgia,serif;letter-spacing:.04em;
 }
 
+/* ── Late 90s Easter Egg ──────────────────────────────── */
+.late90s{
+  display:block;
+  text-align:left;
+  font-family:'fornire',Georgia,serif;
+  font-size:.80rem;
+  color:var(--navy);
+  opacity:.9;
+  letter-spacing:.06em;
+  padding:.6rem 0 .1rem;
+  font-style:italic;
+  width:100%;
+}
+
 /* ── Footer ───────────────────────────────────────────── */
 footer{
   border-top:2px solid var(--navy);
@@ -630,6 +665,10 @@ footer{
   font-size:1.2rem;letter-spacing:.06em;
   color:var(--cream);text-decoration:none;
   margin-bottom:.6rem;
+}
+.footer-brand .brand-logo{
+  height:70px;width:auto;display:block;
+  transform:none;
 }
 .footer-brand .logo{background:var(--orange);color:#fff;border-color:rgba(255,255,255,.3)}
 .footer-tagline{

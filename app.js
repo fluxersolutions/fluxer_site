@@ -1,15 +1,14 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],R=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const go=p=>false?(location.hash='#/'+p):(location.href=p=='home'?'/':'/'+p);
 
-/* ── Common Footer ────────────────────────────────────── */
-function injectFooter(){
-  const el=document.querySelector('footer');
-  if(!el)return;
-  el.innerHTML=`
+/* ── Common Footer (Web Component) ───────────────────── */
+class SiteFooter extends HTMLElement{
+  connectedCallback(){
+    this.innerHTML=`<footer>
 <div class="footer-inner">
   <div class="footer-col">
     <a class="footer-brand" href="/">
-      <img src="/assets/Fulxer_logo.png" alt="Fluxer" class="brand-logo">
+      <img src="/assets/Fluxer%20circle%20logo%20White.svg" alt="Fluxer" class="brand-logo">
     </a>
     <p class="footer-tagline">Bigger and Practical.</p>
   </div>
@@ -41,7 +40,7 @@ function injectFooter(){
 <div class="footer-bar">
   <span>© 2026 Fluxer Solutions Private Limited</span>
   <span class="footer-social">
-    <a href="mailto:fluxersolutions@gmail.com" aria-label="Email us" class="footer-icon-link" title="fluxersolutions@gmail.com">
+    <a href="mailto:support@fluxer.co.in" aria-label="Email us" class="footer-icon-link" title="support@fluxer.co.in">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
     </a>
     <a href="https://www.linkedin.com/company/fluxersolutions/" target="_blank" rel="noopener noreferrer" aria-label="Fluxer on LinkedIn" class="footer-icon-link" title="LinkedIn">
@@ -49,8 +48,10 @@ function injectFooter(){
     </a>
     <a href="/contact">Start a chat</a>
   </span>
-</div>`;
+</div></footer>`;
+  }
 }
+customElements.define('site-footer',SiteFooter);
 
 
 /* ── Audio helpers ────────────────────────────────────── */
@@ -244,13 +245,28 @@ function initHamburger(){
     document.body.appendChild(overlay);
   }
 
+  let _scrollY=0;
   function setOpen(isOpen){
     nav.classList.toggle('open',isOpen);
     btn.setAttribute('aria-expanded',isOpen?'true':'false');
     btn.setAttribute('aria-label',isOpen?'Close navigation menu':'Open navigation menu');
-    document.documentElement.classList.toggle('nav-open',isOpen);
-    document.body.classList.toggle('nav-open',isOpen);
     overlay.classList.toggle('active',isOpen);
+    if(isOpen){
+      _scrollY=window.scrollY;
+      document.documentElement.classList.add('nav-open');
+      document.body.style.cssText=`position:fixed;top:-${_scrollY}px;left:0;right:0;overflow-y:scroll;`;
+    } else {
+      document.documentElement.classList.remove('nav-open');
+      // Suppress smooth-scroll BEFORE releasing the fixed-body lock.
+      // Without this, scrollTo(0, _scrollY) animates from 0→_scrollY visibly (the bounce).
+      document.documentElement.style.scrollBehavior='auto';
+      document.body.style.cssText='';
+      window.scrollTo(0,_scrollY);
+      // Restore smooth scroll after the position has been applied.
+      requestAnimationFrame(()=>{
+        document.documentElement.style.scrollBehavior='';
+      });
+    }
   }
 
   btn.onclick=(e)=>{
@@ -284,7 +300,6 @@ function initHamburger(){
 }
 
 function init(){
-  injectFooter();
   wrapMyFestivo();
 
   $$('.pg>*:not(.seq)').forEach((e,i)=>e.style.animationDelay=Math.min(i,6)*70+'ms');
@@ -340,12 +355,16 @@ function init(){
     if(err) err.style.display='none';
   }
 
+  const WEB3FORMS_KEY = '570b8caf-778b-4c2a-a9be-1a3b56700fce'; // ← replace after signing up at web3forms.com
+
   const f=$('#f');
   if(f)f.onsubmit=e=>{
     e.preventDefault();
     const msgEl=$('#ms');
     const nmEl=$('#nm');
     const emEl=$('#em');
+    const selEl=f.querySelector('select');
+    const submitBtn=f.querySelector('.btn[type=submit]');
     const msgText=msgEl.value.trim();
     const wc=wordCount(msgText);
 
@@ -373,16 +392,49 @@ function init(){
     const n=nmEl.value.trim().split(' ')[0];
     const bx=$('#done');
 
-    // Show submitted message as chat bubble
+    // Show user's message as chat bubble immediately
     say(msgText,1,bx,true);
-    setTimeout(()=>{
-      say('Thanks'+(n?', '+n:'')+'. We got your message and will reply soon.',0,bx,true);
-    },700);
+    f.hidden=true;
+    if(submitBtn) submitBtn.disabled=true;
+
+    // POST to Web3Forms → delivers to support@fluxer.co.in
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: `[Fluxer.co.in] ${selEl?selEl.value:'New message'} — from ${nmEl.value.trim()}`,
+        from_name: nmEl.value.trim(),
+        email: emEl.value.trim(),
+        message: msgText,
+        topic: selEl?selEl.value:'',
+        botcheck: ''
+      })
+    })
+    .then(r=>r.json())
+    .then(data=>{
+      setTimeout(()=>{
+        if(data.success){
+          say('Thanks'+(n?', '+n:'')+'. We got your message and will reply soon.',0,bx,true);
+        } else {
+          say('Something went wrong sending your message. Please email us directly at support@fluxer.co.in.',0,bx,true);
+          f.hidden=false;
+        }
+        if(submitBtn) submitBtn.disabled=false;
+      },700);
+    })
+    .catch(()=>{
+      setTimeout(()=>{
+        say('Could not send your message right now. Please email us at support@fluxer.co.in.',0,bx,true);
+        f.hidden=false;
+        if(submitBtn) submitBtn.disabled=false;
+      },700);
+    });
 
     // Clear all fields
     f.reset();
 
-    // Re-show form after a short delay so user can send another message
+    // Re-show form after a short delay
     setTimeout(()=>{
       bx.innerHTML='';
       f.hidden=false;
