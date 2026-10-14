@@ -406,9 +406,10 @@ function init(){
         subject: `[Fluxer.co.in] ${selEl?selEl.value:'New message'} — from ${nmEl.value.trim()}`,
         from_name: nmEl.value.trim(),
         email: emEl.value.trim(),
+        replyto: emEl.value.trim(),
         message: msgText,
         topic: selEl?selEl.value:'',
-        botcheck: ''
+        botcheck: (document.getElementById('botcheck')||{}).checked||false
       })
     })
     .then(r=>r.json())
