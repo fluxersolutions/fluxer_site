@@ -1,0 +1,43 @@
+# Fluxer
+
+> Fluxer Solutions Private Limited is a technology company based in Tamil Nadu, India. Fluxer builds proprietary SaaS products—including flagship event management platform MyFestivo—and delivers tailored IT services across web development, workflow automation, data analysis, machine learning, and RAG pipelines.
+
+Fluxer operates on the **QUAT** principle:
+- **Quality**: Delivering reliable, robust, and clean digital solutions.
+- **Uniqueness**: Solving niche problems with innovative approaches.
+- **Assurance**: Ensuring dependability and high standards in every delivery.
+- **Transparency**: Clear communication, honest scoping, and collaborative partnership.
+
+Work is delivered on a project basis or retainer for startups, solopreneurs, local businesses, and enterprises.
+
+## Main Pages
+
+- [Home](https://www.fluxer.co.in/): Overview of Fluxer Solutions, company philosophy, mission, and quick navigator.
+- [Products](https://www.fluxer.co.in/products): Information on proprietary products, starring MyFestivo.
+- [Services](https://www.fluxer.co.in/services): Full breakdown of client services including data analysis, web development, ML models, automation, and RAG pipelines.
+- [About](https://www.fluxer.co.in/about): Company mission, QUAT principles, roadmap to 2030, and organizational background.
+- [Founders](https://www.fluxer.co.in/founders): Profiles and backgrounds of co-founders Jagadish R and Pagalavan N.
+- [Contact](https://www.fluxer.co.in/contact): Project consultation form and direct communication channels.
+
+## Products
+
+- [MyFestivo](https://myfestivo.live): College and university event operating system replacing scattered forms and sheets with centralized registration, ticketing, team invites, UPI payment tracking, and day-of check-ins.
+
+## Services
+
+- [Web Development](https://www.fluxer.co.in/services#web-development): Fast, modern landing pages, solopreneur portfolios, web applications, and e-commerce stores.
+- [Automation](https://www.fluxer.co.in/services#automation): Identification and automation of repetitive business operations to eliminate manual toil and boost productivity.
+- [Data Analysis](https://www.fluxer.co.in/services#data-analysis): Data cleaning, transformation, and intuitive visual dashboards to turn messy spreadsheets into actionable business insights.
+- [ML Model Building](https://www.fluxer.co.in/services#ml-model-building): Predictive machine learning models trained on historical customer and sales data for high-accuracy decision making.
+- [RAG Pipeline Development](https://www.fluxer.co.in/services#rag-pipeline-development): Retrieval-Augmented Generation systems integrating internal company documents with AI knowledge bases for reliable, grounded responses.
+
+## Founders & Team
+
+- [Jagadish R](https://www.fluxer.co.in/founders#founder-jagadish): Co-founder. Curious explorer combining creativity and technology to build digital solutions. (LinkedIn: https://www.linkedin.com/in/jagadishr01, Email: jagadish@fluxer.co.in)
+- [Pagalavan N](https://www.fluxer.co.in/founders#founder-pagalavan): Co-founder. Tech enthusiast and entrepreneur dedicated to purposeful products and real-world problem solving. (LinkedIn: https://www.linkedin.com/in/pagalavan-natarajan, Email: pagalavan@fluxer.co.in)
+
+## Optional
+
+- [Sitemap](https://www.fluxer.co.in/sitemap.xml): XML sitemap index of all canonical URLs.
+- [Company LinkedIn](https://www.linkedin.com/company/fluxersolutions/): Official Fluxer Solutions company updates and networking.
+- [Support Email](mailto:support@fluxer.co.in): Direct email support channel.
